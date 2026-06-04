@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Prompt Studio - Demo (No API)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>AI Prompt Studio</h1>
+      <p class="muted">Generate prompt suggestions → choose one → simulate AI response (no API required).</p>
+    </header>
+
+    <section class="card">
+      <form id="promptForm">
+        <div class="row">
+          <label for="goal">Goal</label>
+          <select id="goal" required>
+            <option value="writing">Write (article, email)</option>
+            <option value="coding">Code (function, bug fix)</option>
+            <option value="marketing">Marketing (ad, caption)</option>
+            <option value="design">Design brief</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label for="topic">Topic / Task</label>
+          <input id="topic" type="text" placeholder="Describe topic or task" required />
+        </div>
+
+        <div class="row options">
+          <label for="tone">Tone</label>
+          <select id="tone">
+            <option value="neutral">Neutral</option>
+            <option value="formal">Formal</option>
+            <option value="casual">Casual</option>
+            <option value="creative">Creative</option>
+          </select>
+
+          <label for="length">Length</label>
+          <select id="length">
+            <option value="short">Short</option>
+            <option value="medium" selected>Medium</option>
+            <option value="long">Long</option>
+          </select>
+        </div>
+
+        <div class="row">
+          <label><input id="preserve" type="checkbox" /> Preserve exact wording (do not paraphrase)</label>
+        </div>
+
+        <div class="row">
+          <label><input id="directMode" type="checkbox" /> Direct Answer Mode (final answer only)</label>
+        </div>
+
+        <div class="row">
+          <label><input id="directPro" type="checkbox" /> Direct Answer Pro (strict final answer)</label>
+        </div>
+
+        <div class="row actions">
+          <button id="generateBtn" type="submit">Generate Prompt</button>
+          <button id="clearBtn" type="button" class="ghost">Clear</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card result">
+      <div class="result-header">
+        <h2>Generated Prompt</h2>
+        <div>
+          <button id="copyBtn">Copy</button>
+          <button id="saveBtn">Save</button>
+        </div>
+      </div>
+
+      <pre id="output" class="output" tabindex="0">Your prompt will appear here...</pre>
+
+      <!-- VARIANTS UI (added) -->
+      <section class="card variants-card">
+        <h3>Suggested Prompts</h3>
+        <div id="variantsList" style="display:flex;flex-direction:column;gap:8px"></div>
+
+        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+          <button id="genVariantsBtn" class="smallBtn">Generate Suggestions</button>
+          <button id="useSelectedBtn" class="smallBtn">Use Selected</button>
+          <button id="runSelectedBtn" class="smallBtn">Run Selected (Sim)</button>
+          <button id="runSimBtn" class="smallBtn">Simulate Selected</button>
+        </div>
+      </section>
+
+      <details class="favorites">
+        <summary>Saved Prompts (<span id="favCount">0</span>)</summary>
+        <ul id="favList"></ul>
+      </details>
+    </section>
+
+    <!-- AI Answer (simulation) -->
+    <section class="card">
+      <h3>AI Answer (Simulated)</h3>
+      <pre id="aiAnswer" class="output">AI answer will appear here...</pre>
+    </section>
+
+    <div id="toast" aria-hidden="true" class="toast" style="display:none"></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
